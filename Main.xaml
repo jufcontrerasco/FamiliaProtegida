@@ -1,0 +1,291 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="Main" mva:VisualBasic.Settings="{x:Null}" sap:VirtualizedContainerService.HintSize="775,3498" sap2010:WorkflowViewState.IdRef="ActivityBuilder_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:be="clr-namespace:BalaReva.Externals;assembly=BalaReva.Externals" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <TextExpression.NamespacesForImplementation>
+    <scg:List x:TypeArguments="x:String" Capacity="22">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>System.Xml.Serialization</x:String>
+    </scg:List>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <scg:List x:TypeArguments="AssemblyReference" Capacity="40">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>UiPath.Mail</AssemblyReference>
+      <AssemblyReference>System.IO.Compression.FileSystem</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>System.Data.Entity</AssemblyReference>
+    </scg:List>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence sap:VirtualizedContainerService.HintSize="755,3398" sap2010:WorkflowViewState.IdRef="Sequence_2">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="sd:DataTable" Name="Found" />
+      <Variable x:TypeArguments="sd:DataTable" Name="Filtered" />
+      <Variable x:TypeArguments="s:DateTime" Name="dateTarget" />
+      <Variable x:TypeArguments="x:String" Name="input" />
+      <Variable x:TypeArguments="x:String" Name="aa" />
+      <Variable x:TypeArguments="s:String[]" Default="[{&quot;COE&quot;,&quot;CLE&quot;,&quot;BOE&quot;,&quot;PEE&quot;,&quot;ECL&quot;}]" Name="paises" />
+      <Variable x:TypeArguments="x:String" Name="saveFolder" />
+      <Variable x:TypeArguments="x:String" Name="zipFolder" />
+      <Variable x:TypeArguments="x:String" Name="chosenOp" />
+      <Variable x:TypeArguments="sd:DataTable" Name="FoundIn" />
+      <Variable x:TypeArguments="sd:DataTable" Name="FilteredIn" />
+      <Variable x:TypeArguments="sd:DataTable" Name="FoundO" />
+      <Variable x:TypeArguments="sd:DataTable" Name="FilteredO" />
+    </Sequence.Variables>
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <ui:InputDialog Options="{x:Null}" DisplayName="Input Dialog" sap:VirtualizedContainerService.HintSize="713,92" sap2010:WorkflowViewState.IdRef="InputDialog_1" IsPassword="False" Label="La fecha debe estar en formato mm/dd/aaaa" Title="Ingrese la fecha">
+      <ui:InputDialog.Result>
+        <OutArgument x:TypeArguments="x:String">[input]</OutArgument>
+      </ui:InputDialog.Result>
+    </ui:InputDialog>
+    <Assign sap:VirtualizedContainerService.HintSize="713,60" sap2010:WorkflowViewState.IdRef="Assign_1">
+      <Assign.To>
+        <OutArgument x:TypeArguments="s:DateTime">[dateTarget]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="s:DateTime">[DateTime.ParseExact(input.Trim,"MM/dd/yyyy",System.Globalization.CultureInfo.InvariantCulture)]</InArgument>
+      </Assign.Value>
+    </Assign>
+    <Assign sap:VirtualizedContainerService.HintSize="713,60" sap2010:WorkflowViewState.IdRef="Assign_2">
+      <Assign.To>
+        <OutArgument x:TypeArguments="x:String">[aa]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="x:String">[dateTarget.ToString("yyyyMMdd")]</InArgument>
+      </Assign.Value>
+    </Assign>
+    <ui:CreateDirectory ContinueOnError="True" DisplayName="Create Directory" sap:VirtualizedContainerService.HintSize="713,22" sap2010:WorkflowViewState.IdRef="CreateDirectory_1" Path="[&quot;D:\Users\pticolombia\Documents\Paralife-Familia_protegida\diarios\&quot;+dateTarget.ToString(&quot;MM&quot;)+&quot;\&quot;+dateTarget.ToString(&quot;dd&quot;)]" />
+    <Assign sap:VirtualizedContainerService.HintSize="713,60" sap2010:WorkflowViewState.IdRef="Assign_4">
+      <Assign.To>
+        <OutArgument x:TypeArguments="x:String">[saveFolder]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="x:String">["D:\Users\pticolombia\Documents\Paralife-Familia_protegida\diarios\"+dateTarget.ToString("MM")+"\"+dateTarget.ToString("dd")]</InArgument>
+      </Assign.Value>
+    </Assign>
+    <Assign sap:VirtualizedContainerService.HintSize="713,60" sap2010:WorkflowViewState.IdRef="Assign_5">
+      <Assign.To>
+        <OutArgument x:TypeArguments="x:String">[zipFolder]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="x:String">["D:\Users\pticolombia\Documents\Paralife-Familia_protegida\diarios\"+dateTarget.ToString("MM")+"\"+dateTarget.ToString("dd")]</InArgument>
+      </Assign.Value>
+    </Assign>
+    <ui:ForEach x:TypeArguments="x:Object" CurrentIndex="{x:Null}" DisplayName="For Each" sap:VirtualizedContainerService.HintSize="713,2218" sap2010:WorkflowViewState.IdRef="ForEach`1_1" Values="[paises]">
+      <ui:ForEach.Body>
+        <ActivityAction x:TypeArguments="x:Object">
+          <ActivityAction.Argument>
+            <DelegateInArgument x:TypeArguments="x:Object" Name="item" />
+          </ActivityAction.Argument>
+          <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="468,2084" sap2010:WorkflowViewState.IdRef="Sequence_5">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <ui:CreateDirectory ContinueOnError="True" DisplayName="Create Directory" sap:VirtualizedContainerService.HintSize="426,22" sap2010:WorkflowViewState.IdRef="CreateDirectory_2" Path="[&quot;D:\Users\pticolombia\Documents\Paralife-Familia_protegida\diarios\&quot;+dateTarget.ToString(&quot;MM&quot;)+&quot;\&quot;+dateTarget.ToString(&quot;dd&quot;)+&quot;\&quot;+item.ToString]" />
+            <ui:CreateDirectory ContinueOnError="True" DisplayName="Create Directory" sap:VirtualizedContainerService.HintSize="426,22" sap2010:WorkflowViewState.IdRef="CreateDirectory_3" Path="[&quot;D:\Users\pticolombia\Documents\Paralife-Familia_protegida\diarios\&quot;+dateTarget.ToString(&quot;MM&quot;)+&quot;\&quot;+dateTarget.ToString(&quot;dd&quot;)+&quot;\&quot;+item.ToString+&quot;\IN&quot;]" />
+            <ui:CreateDirectory ContinueOnError="True" DisplayName="Create Directory" sap:VirtualizedContainerService.HintSize="426,22" sap2010:WorkflowViewState.IdRef="CreateDirectory_4" Path="[&quot;D:\Users\pticolombia\Documents\Paralife-Familia_protegida\diarios\&quot;+dateTarget.ToString(&quot;MM&quot;)+&quot;\&quot;+dateTarget.ToString(&quot;dd&quot;)+&quot;\&quot;+item.ToString+&quot;\OUT&quot;]" />
+            <ui:EnumerateFiles KeyFiles="{x:Null}" DisplayName="Enumerate files" Files="[Found]" sap:VirtualizedContainerService.HintSize="426,87" Host="10.24.2.23" sap2010:WorkflowViewState.IdRef="EnumerateFiles_1" IncludeSubdirectories="True" Password="Migralife17" Port="21" RemotePath="[&quot;/ftpparalife/&quot;+item.ToString+&quot;/INT/OUT&quot;]" SecureFTP="False" Username="Galileo\paralife">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+            </ui:EnumerateFiles>
+            <ui:FilterDataTable DataTable="[Found]" DisplayName="Filter Data Table" FilterRowsMode="Keep" sap:VirtualizedContainerService.HintSize="426,59" sap2010:WorkflowViewState.IdRef="FilterDataTable_1" OutputDataTable="[Filtered]" SelectColumnsMode="Keep">
+              <ui:FilterDataTable.Filters>
+                <scg:List x:TypeArguments="ui:FilterOperationArgument" Capacity="4">
+                  <ui:FilterOperationArgument BooleanOperator="And" Operator="EQ">
+                    <ui:FilterOperationArgument.Column>
+                      <InArgument x:TypeArguments="x:String">["LastWriteTime"]</InArgument>
+                    </ui:FilterOperationArgument.Column>
+                    <ui:FilterOperationArgument.Operand>
+                      <InArgument x:TypeArguments="s:DateTime">[dateTarget]</InArgument>
+                    </ui:FilterOperationArgument.Operand>
+                  </ui:FilterOperationArgument>
+                  <ui:FilterOperationArgument BooleanOperator="Or" Operator="CONTAINS">
+                    <ui:FilterOperationArgument.Column>
+                      <InArgument x:TypeArguments="x:String">["Name"]</InArgument>
+                    </ui:FilterOperationArgument.Column>
+                    <ui:FilterOperationArgument.Operand>
+                      <InArgument x:TypeArguments="x:String">[aa]</InArgument>
+                    </ui:FilterOperationArgument.Operand>
+                  </ui:FilterOperationArgument>
+                </scg:List>
+              </ui:FilterDataTable.Filters>
+              <ui:FilterDataTable.SelectColumns>
+                <scg:List x:TypeArguments="InArgument" Capacity="4">
+                  <x:Null />
+                </scg:List>
+              </ui:FilterDataTable.SelectColumns>
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+            </ui:FilterDataTable>
+            <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="426,61" sap2010:WorkflowViewState.IdRef="WriteLine_1" Text="[Found.rows.Count.ToString]" />
+            <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="426,61" sap2010:WorkflowViewState.IdRef="WriteLine_2" Text="[Filtered.rows.Count.ToString]" />
+            <ui:ForEachRow CurrentIndex="{x:Null}" DataTable="[Filtered]" DisplayName="For Each Row" sap:VirtualizedContainerService.HintSize="426,455" sap2010:WorkflowViewState.IdRef="ForEachRow_1">
+              <ui:ForEachRow.Body>
+                <ActivityAction x:TypeArguments="sd:DataRow">
+                  <ActivityAction.Argument>
+                    <DelegateInArgument x:TypeArguments="sd:DataRow" Name="row" />
+                  </ActivityAction.Argument>
+                  <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="376,307" sap2010:WorkflowViewState.IdRef="Sequence_4">
+                    <Sequence.Variables>
+                      <Variable x:TypeArguments="ui:GenericValue" Name="fileTarget" />
+                    </Sequence.Variables>
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                    <Assign sap:VirtualizedContainerService.HintSize="334,60" sap2010:WorkflowViewState.IdRef="Assign_3">
+                      <Assign.To>
+                        <OutArgument x:TypeArguments="ui:GenericValue">[fileTarget]</OutArgument>
+                      </Assign.To>
+                      <Assign.Value>
+                        <InArgument x:TypeArguments="ui:GenericValue">[row.Item("Fullname").ToString]</InArgument>
+                      </Assign.Value>
+                    </Assign>
+                    <ui:Download DownloadedFiles="{x:Null}" KeyFiles="{x:Null}" NotDownloadedFiles="{x:Null}" sap:VirtualizedContainerService.HintSize="334,115" Host="10.24.2.23" sap2010:WorkflowViewState.IdRef="Download_1" LocalPath="[&quot;D:\Users\pticolombia\Documents\Paralife-Familia_protegida\diarios\&quot;+dateTarget.ToString(&quot;MM&quot;)+&quot;\&quot;+dateTarget.ToString(&quot;dd&quot;)+&quot;\&quot;+item.ToString+&quot;\OUT&quot;]" Password="Migralife17" Port="21" RemotePath="[fileTarget]" SecureFTP="False" Username="Galileo\paralife" />
+                  </Sequence>
+                </ActivityAction>
+              </ui:ForEachRow.Body>
+            </ui:ForEachRow>
+            <ui:EnumerateFiles KeyFiles="{x:Null}" DisplayName="Enumerate files" Files="[FoundIn]" sap:VirtualizedContainerService.HintSize="426,87" Host="10.24.2.23" sap2010:WorkflowViewState.IdRef="EnumerateFiles_3" IncludeSubdirectories="True" Password="Migralife17" Port="21" RemotePath="[&quot;/ftpparalife/&quot;+item.ToString+&quot;/HIST/IN&quot;]" SecureFTP="False" Username="Galileo\paralife">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+            </ui:EnumerateFiles>
+            <ui:FilterDataTable DataTable="[FoundIn]" DisplayName="Filter Data Table" FilterRowsMode="Keep" sap:VirtualizedContainerService.HintSize="426,59" sap2010:WorkflowViewState.IdRef="FilterDataTable_3" OutputDataTable="[FilteredIn]" SelectColumnsMode="Keep">
+              <ui:FilterDataTable.Filters>
+                <scg:List x:TypeArguments="ui:FilterOperationArgument" Capacity="4">
+                  <ui:FilterOperationArgument BooleanOperator="And" Operator="EQ">
+                    <ui:FilterOperationArgument.Column>
+                      <InArgument x:TypeArguments="x:String">["LastWriteTime"]</InArgument>
+                    </ui:FilterOperationArgument.Column>
+                    <ui:FilterOperationArgument.Operand>
+                      <InArgument x:TypeArguments="s:DateTime">[dateTarget]</InArgument>
+                    </ui:FilterOperationArgument.Operand>
+                  </ui:FilterOperationArgument>
+                  <ui:FilterOperationArgument BooleanOperator="Or" Operator="CONTAINS">
+                    <ui:FilterOperationArgument.Column>
+                      <InArgument x:TypeArguments="x:String">["Name"]</InArgument>
+                    </ui:FilterOperationArgument.Column>
+                    <ui:FilterOperationArgument.Operand>
+                      <InArgument x:TypeArguments="x:String">[aa]</InArgument>
+                    </ui:FilterOperationArgument.Operand>
+                  </ui:FilterOperationArgument>
+                </scg:List>
+              </ui:FilterDataTable.Filters>
+              <ui:FilterDataTable.SelectColumns>
+                <scg:List x:TypeArguments="InArgument" Capacity="4">
+                  <x:Null />
+                </scg:List>
+              </ui:FilterDataTable.SelectColumns>
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+            </ui:FilterDataTable>
+            <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="426,61" sap2010:WorkflowViewState.IdRef="WriteLine_3" Text="[FoundIn.rows.Count.ToString]" />
+            <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="426,61" sap2010:WorkflowViewState.IdRef="WriteLine_4" Text="[FilteredIn.rows.Count.ToString]" />
+            <ui:ForEachRow CurrentIndex="{x:Null}" DataTable="[FilteredIn]" DisplayName="For Each Row" sap:VirtualizedContainerService.HintSize="426,455" sap2010:WorkflowViewState.IdRef="ForEachRow_2">
+              <ui:ForEachRow.Body>
+                <ActivityAction x:TypeArguments="sd:DataRow">
+                  <ActivityAction.Argument>
+                    <DelegateInArgument x:TypeArguments="sd:DataRow" Name="row" />
+                  </ActivityAction.Argument>
+                  <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="376,307" sap2010:WorkflowViewState.IdRef="Sequence_6">
+                    <Sequence.Variables>
+                      <Variable x:TypeArguments="ui:GenericValue" Name="fileTarget" />
+                    </Sequence.Variables>
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                    <Assign sap:VirtualizedContainerService.HintSize="334,60" sap2010:WorkflowViewState.IdRef="Assign_6">
+                      <Assign.To>
+                        <OutArgument x:TypeArguments="ui:GenericValue">[fileTarget]</OutArgument>
+                      </Assign.To>
+                      <Assign.Value>
+                        <InArgument x:TypeArguments="ui:GenericValue">[row.Item("Fullname").ToString]</InArgument>
+                      </Assign.Value>
+                    </Assign>
+                    <ui:Download DownloadedFiles="{x:Null}" KeyFiles="{x:Null}" NotDownloadedFiles="{x:Null}" sap:VirtualizedContainerService.HintSize="334,115" Host="10.24.2.23" sap2010:WorkflowViewState.IdRef="Download_2" LocalPath="[&quot;D:\Users\pticolombia\Documents\Paralife-Familia_protegida\diarios\&quot;+dateTarget.ToString(&quot;MM&quot;)+&quot;\&quot;+dateTarget.ToString(&quot;dd&quot;)+&quot;\&quot;+item.ToString+&quot;\IN&quot;]" Password="Migralife17" Port="21" RemotePath="[fileTarget]" SecureFTP="False" Username="Galileo\paralife" />
+                  </Sequence>
+                </ActivityAction>
+              </ui:ForEachRow.Body>
+            </ui:ForEachRow>
+          </Sequence>
+        </ActivityAction>
+      </ui:ForEach.Body>
+    </ui:ForEach>
+    <be:ZipFiles MultipleFolders="{x:Null}" Password="{x:Null}" DisplayName="zip results" sap:VirtualizedContainerService.HintSize="713,22" sap2010:WorkflowViewState.IdRef="ZipFiles_1" SourceFolder="[saveFolder]" ZipFile="[zipFolder+&quot;.zip&quot;]" />
+    <ui:MessageBox Caption="{x:Null}" Buttons="YesNo" ChosenButton="[chosenOp]" DisplayName="Message Box" sap:VirtualizedContainerService.HintSize="713,59" sap2010:WorkflowViewState.IdRef="MessageBox_1" Text="[&quot;El archivo fue guardado en la ruta &quot;+ zipFolder+&quot;, desea enviar el correo? &quot;]" TopMost="True" />
+    <If Condition="[chosenOp.Equals(&quot;Yes&quot;)]" sap:VirtualizedContainerService.HintSize="713,293" sap2010:WorkflowViewState.IdRef="If_1">
+      <If.Then>
+        <ui:SendOutlookMail Account="{x:Null}" Bcc="{x:Null}" MailMessage="{x:Null}" TimeoutMS="{x:Null}" Body="Buenos días,&#xA;&#xA;Adjunto envío los archivos generados de familia protegida &#xA;Cordialmente,&#xA;&#xA;    Juan Felipe Contreras Correa&#xA;    Practicante de Tecnología&#xA;    Lync: “Practicante TI Colombia” &#xA;    Autopista Norte km 22, Tocancipá&#xA;    Bogotá, Colombia&#xA;" Cc="pticolombia@belcorp.biz;mcanchila@belcorp.biz" DisplayName="Send Outlook Mail Message" sap:VirtualizedContainerService.HintSize="334,145" sap2010:WorkflowViewState.IdRef="SendOutlookMail_1" IsBodyHtml="False" IsDraft="False" Subject="Archivos Familia Protegida - Octubre" To="jpmoreno@belcorp.biz;ynino@belcorp.biz">
+          <ui:SendOutlookMail.Files>
+            <scg:List x:TypeArguments="InArgument(x:String)" Capacity="4">
+              <InArgument x:TypeArguments="x:String">[zipFolder+".zip"]</InArgument>
+            </scg:List>
+          </ui:SendOutlookMail.Files>
+        </ui:SendOutlookMail>
+      </If.Then>
+      <If.Else>
+        <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" Buttons="Ok" DisplayName="Message Box" sap:VirtualizedContainerService.HintSize="334,59" sap2010:WorkflowViewState.IdRef="MessageBox_2" Text="[&quot;Error no especificado (01)&quot;]" TopMost="True" />
+      </If.Else>
+    </If>
+  </Sequence>
+</Activity>
